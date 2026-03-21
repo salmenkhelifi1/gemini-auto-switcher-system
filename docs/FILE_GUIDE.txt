@@ -1,0 +1,178 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║           QUALITY PLACES SCRAPER - FILE GUIDE                         ║
+║                   Created: January 15, 2026                           ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+📦 COMPLETE PACKAGE (7 Files)
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ 🚀 QUICK START (Read First)                                          │
+├───────────────────────────────────────────────────────────────────────┤
+│ 📄 QUICK_START.md (4.1 KB)                                           │
+│    → 5-minute setup guide                                            │
+│    → Step-by-step installation                                       │
+│    → Test instructions                                               │
+│    ✅ START HERE!                                                     │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ ⚙️ WORKFLOW & DATA                                                    │
+├───────────────────────────────────────────────────────────────────────┤
+│ 📄 quality_places_scraper_workflow.json (11 KB)                      │
+│    → Import this to n8n                                              │
+│    → Complete workflow definition                                    │
+│    → All nodes configured                                            │
+│    ✅ IMPORT TO N8N                                                   │
+│                                                                       │
+│ 📄 locations_input_template.csv (549 bytes)                          │
+│    → CSV template for cities                                         │
+│    → Example data included                                           │
+│    → Import to Google Sheets "Locations"                             │
+│    ✅ CUSTOMIZE & IMPORT                                              │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ 📚 DOCUMENTATION (Read as Needed)                                     │
+├───────────────────────────────────────────────────────────────────────┤
+│ 📄 QUALITY_SCRAPER_GUIDE.md (9.1 KB)                                 │
+│    → Complete setup documentation                                    │
+│    → Google Sheets structure                                         │
+│    → Customization options                                           │
+│    → Best practices                                                  │
+│    ✅ FULL REFERENCE                                                  │
+│                                                                       │
+│ 📄 WORKFLOW_SUMMARY.md (14 KB)                                       │
+│    → Technical architecture                                          │
+│    → Data flow diagrams                                              │
+│    → Performance metrics                                             │
+│    → Advanced details                                                │
+│    ✅ FOR TECH DEEP-DIVE                                              │
+│                                                                       │
+│ 📄 TROUBLESHOOTING.md (8.2 KB)                                       │
+│    → Common errors & solutions                                       │
+│    → Debugging checklist                                             │
+│    → FAQ                                                             │
+│    ✅ WHEN THINGS GO WRONG                                            │
+│                                                                       │
+│ 📄 README_SCRAPER.md (8.6 KB)                                        │
+│    → Package overview                                                │
+│    → Quick reference                                                 │
+│    → File descriptions                                               │
+│    ✅ PACKAGE SUMMARY                                                 │
+└───────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════
+
+📖 READING ORDER (Recommended)
+
+  1️⃣  README_SCRAPER.md        ← Overview (start here)
+  2️⃣  QUICK_START.md           ← Setup (5 minutes)
+  3️⃣  Test with 1 city         ← Verify it works
+  4️⃣  QUALITY_SCRAPER_GUIDE.md ← Deep dive (when needed)
+  5️⃣  TROUBLESHOOTING.md       ← If issues arise
+  6️⃣  WORKFLOW_SUMMARY.md      ← Technical details (optional)
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 WORKFLOW FEATURES
+
+  ⭐ Min Rating: 4.0+ stars
+  💬 Min Reviews: 50+ reviews  
+  ✅ Active only (not closed)
+  🏆 Ranked: Rating → Reviews
+  📊 Top 5 per city
+  🔄 Auto-runs every 6 hours
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 GOOGLE SHEETS STRUCTURE
+
+  Sheet 1: "Locations" (INPUT)
+  ┌─────────┬──────────┬──────────┬──────────┐
+  │ Country │ State    │ City     │ Category │
+  ├─────────┼──────────┼──────────┼──────────┤
+  │ USA     │ CA       │ LA       │ restaurant│
+  │ France  │ Île-de-F │ Paris    │ hotel    │
+  └─────────┴──────────┴──────────┴──────────┘
+
+  Sheet 2: "Results" (OUTPUT)
+  ┌─────────┬──────┬────────┬─────────────┬───────────┬─────────┐
+  │ Country │ City │ Total  │ Quality     │ Place1... │ Place2..│
+  │         │      │ Found  │ Places      │           │         │
+  ├─────────┼──────┼────────┼─────────────┼───────────┼─────────┤
+  │ USA     │ LA   │ 287    │ 58          │ Name:...  │ Name:...│
+  │         │      │        │             │ Rating:4.9│ Rating..│
+  │         │      │        │             │ Reviews:..│ Reviews.│
+  └─────────┴──────┴────────┴─────────────┴───────────┴─────────┘
+
+═══════════════════════════════════════════════════════════════════════
+
+🔧 REQUIRED CREDENTIALS
+
+  1. Google Sheets OAuth2
+     ID: QLIUHzCUR4PCeaCP
+     Status: ✅ Already configured
+
+  2. Apify API (HTTP Header Auth)
+     Name: "Apify API"
+     Header: Authorization
+     Value: Bearer YOUR_APIFY_API_TOKEN
+     Status: ⚠️  Need to set up (see QUICK_START.md)
+
+═══════════════════════════════════════════════════════════════════════
+
+⏱️ PERFORMANCE ESTIMATES
+
+  │ Cities │ Processing Time │ API Calls      │
+  ├────────┼─────────────────┼────────────────┤
+  │ 1      │ ~2-3 minutes    │ 1 Apify run    │
+  │ 10     │ ~25 minutes     │ 10 Apify runs  │
+  │ 50     │ ~2 hours        │ 50 Apify runs  │
+  │ 100    │ ~4 hours        │ 100 Apify runs │
+
+  Tip: Process in batches (10-20 cities) for better control
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ PRE-LAUNCH CHECKLIST
+
+  □ Google Sheet created (ID: 1x38HGrufco-IF_w_GL7GqCFlabNMYfI9-uWAQ3ESOAk)
+  □ Sheet "Locations" created with header row
+  □ Sheet "Results" created (empty)
+  □ Cities added to "Locations" sheet
+  □ Workflow imported to n8n
+  □ Apify credential configured (HTTP Header Auth)
+  □ Google Sheets credential working
+  □ Tested with 1 city successfully
+  □ Workflow activated (toggle ON)
+
+═══════════════════════════════════════════════════════════════════════
+
+🔗 QUICK LINKS
+
+  n8n Instance: https://n8n.iwilltravelto.com
+  Google Sheet:  https://docs.google.com/spreadsheets/d/1x38HGrufco-IF_w_GL7GqCFlabNMYfI9-uWAQ3ESOAk
+  Apify Console: https://console.apify.com
+  GitHub Repo:   https://github.com/salmenkhelifi1/iwilltravelto
+
+═══════════════════════════════════════════════════════════════════════
+
+🎓 SUPPORT RESOURCES
+
+  • Full guide: QUALITY_SCRAPER_GUIDE.md
+  • Quick setup: QUICK_START.md
+  • Problems? TROUBLESHOOTING.md
+  • Tech details: WORKFLOW_SUMMARY.md
+  • Overview: README_SCRAPER.md
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 GETTING STARTED (3 STEPS)
+
+  1. Read README_SCRAPER.md (overview)
+  2. Follow QUICK_START.md (setup)
+  3. Test with 1 city, then scale up!
+
+═══════════════════════════════════════════════════════════════════════
+
+Version: 1.0 | Created: January 15, 2026 | Status: Production Ready ✅

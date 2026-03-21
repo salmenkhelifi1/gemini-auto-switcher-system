@@ -1,0 +1,134 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║         SIMPLE APIFY SCRAPER - QUICK REFERENCE CARD                   ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+📋 WHAT IT DOES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ Scrapes Google Places using Apify
+  ✅ Saves results to Google Sheets automatically
+  ✅ Webhook-triggered (send POST request to run)
+  ✅ No filtering - saves ALL results
+
+🚀 QUICK ACTIVATION (3 STEPS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. Go to https://n8n.iwilltravelto.com
+  2. Import: simple_apify_scraper.json
+  3. Toggle "Active" to ON
+
+📂 FILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚙️  simple_apify_scraper.json     → Import to n8n
+  📖 SIMPLE_SCRAPER_GUIDE.md        → Full documentation
+  ✅ ACTIVATION_GUIDE.md            → Step-by-step activation
+  📋 QUICK_REFERENCE.txt            → This file
+
+🔧 SETUP REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. Google Sheet with "ScrapedPlaces" sheet
+     Sheet ID: 1x38HGrufco-IF_w_GL7GqCFlabNMYfI9-uWAQ3ESOAk
+  
+  2. Apify API Credential (HTTP Header Auth)
+     Name: Apify API
+     Header: Authorization
+     Value: Bearer YOUR_APIFY_API_TOKEN
+
+🌐 WEBHOOK URL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  https://n8n.iwilltravelto.com/webhook/apify-scrape
+
+💻 HOW TO USE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  BASIC USAGE:
+  ────────────────────────────────────────────────────────────────────
+  curl -X POST "https://n8n.iwilltravelto.com/webhook/apify-scrape" \
+    -H "Content-Type: application/json" \
+    -d '{"searchQuery": "restaurants in Paris"}'
+
+  WITH CUSTOM MAX PLACES:
+  ────────────────────────────────────────────────────────────────────
+  curl -X POST "https://n8n.iwilltravelto.com/webhook/apify-scrape" \
+    -H "Content-Type: application/json" \
+    -d '{"searchQuery": "hotels in London", "maxPlaces": 50}'
+
+  PARAMETERS:
+  ────────────────────────────────────────────────────────────────────
+    searchQuery   (required)  - What to search
+    maxPlaces     (optional)  - How many places (default: 20)
+    language      (optional)  - Language code (default: "en")
+
+📊 DATA SAVED TO GOOGLE SHEETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Sheet: ScrapedPlaces
+  
+  Columns:
+  ├─ name              - Place name
+  ├─ address           - Full address
+  ├─ rating            - Star rating (1-5)
+  ├─ reviews           - Number of reviews
+  ├─ phone             - Phone number
+  ├─ website           - Website URL
+  ├─ category          - Category name
+  ├─ priceLevel        - Price level ($-$$$$)
+  ├─ latitude          - GPS latitude
+  ├─ longitude         - GPS longitude
+  ├─ googleMapsUrl     - Google Maps link
+  ├─ imageUrl          - Image URL
+  ├─ openingHours      - Opening hours
+  ├─ isOpen            - Is currently open (true/false)
+  └─ scrapedAt         - Timestamp
+
+📝 EXAMPLE SEARCHES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  "restaurants in Paris"
+  "hotels in London"
+  "cafes in Barcelona"
+  "museums in Rome"
+  "sushi restaurants in Tokyo"
+  "5 star hotels in Dubai"
+  "coffee shops in Seattle"
+
+✅ EXPECTED RESPONSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  {
+    "success": true,
+    "message": "Places scraped and saved successfully",
+    "count": 20,
+    "savedToSheets": true,
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/..."
+  }
+
+⏱️  PROCESSING TIME
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  10-20 places:  ~2-3 minutes
+  30-50 places:  ~3-4 minutes
+  100+ places:   ~5-6 minutes
+
+🔍 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Problem: Webhook not found
+  Fix:     Activate workflow (toggle ON in n8n)
+
+  Problem: Apify error
+  Fix:     Check Apify credential is set up correctly
+
+  Problem: Sheet error
+  Fix:     Create "ScrapedPlaces" sheet in Google Sheets
+
+  Problem: No results
+  Fix:     Wait 2-3 minutes, check Google Sheets again
+
+🔗 QUICK LINKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  n8n:          https://n8n.iwilltravelto.com
+  Google Sheet: https://docs.google.com/spreadsheets/d/1x38HGrufco-IF_w_GL7GqCFlabNMYfI9-uWAQ3ESOAk
+  Apify:        https://console.apify.com
+
+📚 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Read ACTIVATION_GUIDE.md     - For step-by-step activation
+  Read SIMPLE_SCRAPER_GUIDE.md - For full usage guide
+
+═══════════════════════════════════════════════════════════════════════
+                        Version 1.0 | Jan 15, 2026
+═══════════════════════════════════════════════════════════════════════
