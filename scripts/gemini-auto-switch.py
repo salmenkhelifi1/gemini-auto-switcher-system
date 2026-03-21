@@ -43,10 +43,6 @@ def get_quota_percentage(account_id):
         return 100
     try:
         data = json.loads(acc_file.read_text())
-        # Check if it belongs to the target project
-        if data.get("project_id") != TARGET_PROJECT:
-            return -1 # Mark as non-target
-            
         usage = data.get("gemini_usage_raw", {})
         buckets = usage.get("buckets", [])
         if not buckets:

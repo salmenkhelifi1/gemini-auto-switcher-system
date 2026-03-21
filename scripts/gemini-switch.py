@@ -56,9 +56,16 @@ def main():
     
     # 2. Update oauth_creds.json
     oc_path = gemini_dir / "oauth_creds.json"
+    
+    # Append project_id to refresh_token for the Switcher Plugin
+    project_id = full_acc.get("project_id", "rosy-odyssey-86f3p")
+    refresh_token = full_acc.get("refresh_token")
+    if refresh_token and "|" not in refresh_token:
+        refresh_token = f"{refresh_token}|{project_id}"
+        
     oc_data = {
         "access_token": full_acc.get("access_token"),
-        "refresh_token": full_acc.get("refresh_token"),
+        "refresh_token": refresh_token,
         "id_token": full_acc.get("id_token"),
         "token_type": full_acc.get("token_type", "Bearer"),
         "scope": full_acc.get("scope"),
